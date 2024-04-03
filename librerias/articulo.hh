@@ -21,7 +21,7 @@ public:
         id(0), x(0), y(0), ancho(0), alto(0), area(0) {}
 
     void mostrar_articulo(){
-        cout << "Articulo " + id << ":" << endl;
+        cout << "Articulo " << id << ":" << endl;
         cout << "-----------------" << endl;
         cout << "ancho -> " << ancho << endl;
         cout << "alto -> " << alto << endl;
