@@ -53,7 +53,7 @@ void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articul
 
 
 
-int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir){
+int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion){
     int area_max = 0;
     vector<Articulo> articulos_no_interseccionados = encontrar_no_interseccionados(articulos_anadidos, articulos_por_anadir);
 
@@ -67,10 +67,11 @@ int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos
             articulos_anadidos.push_back(art_anadido);
             eliminar_articulo_vector(art_anadido, articulos_por_anadir);
 
-            area_calculada = art_anadido.area + maximizeArea(articulos_anadidos, articulos_por_anadir);
+            area_calculada = art_anadido.area + maximizeArea(articulos_anadidos, articulos_por_anadir, solucion);
 
             if(area_calculada > area_max){
                 area_max = area_calculada;
+                solucion = articulos_anadidos;
             }
 
             // volvemos a los valores originales
@@ -82,9 +83,18 @@ int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos
     return area_max;
 }
 
+void imprimir_solucion(int num_test, int area_solucion, vector<Articulo> art_solucion){
+    cout << "Test " << num_test << " | Area: " << area_solucion << ", Articulos:";
+    for(Articulo art : art_solucion){
+        cout << " " << art.id;
+    }
+    cout << endl << endl;
+}
+
 
 int main() {
 
+    vector<Articulo> solucion;
     // vector<Articulo> todos_articulos = {Articulo(1, 2, 2, 3, 2), Articulo(2, 2, 1, 4, 3), Articulo(3, 1, 1, 2, 2), Articulo(4, 1, 3, 3, 4)}; // solucion 8
     vector<Articulo> test_1 = {Articulo(1, 3, 3, 3, 3), Articulo(2, 3, 3, 1, 1), Articulo(3, 3, 3, 5, 1), Articulo(4, 3, 3, 1, 5), Articulo(5, 3, 3, 5, 5)};
     vector<Articulo> test_2 = {Articulo(1, 1, 1, 1, 1), Articulo(2, 2, 3, 1, 3), Articulo(3, 8, 4, 1, 3), Articulo(4, 9, 5, 3, 1)};
@@ -92,17 +102,17 @@ int main() {
     vector<Articulo> test_4 = {Articulo(1, 3, 7, 0, 0), Articulo(2, 6, 7, 3, 0), Articulo(3, 3, 7, 9, 0), Articulo(4, 12, 7, 0, 0)};
 
     
-    int area_solucion = maximizeArea({}, test_1);
-    cout << area_solucion << endl;
+    int area_solucion = maximizeArea({}, test_1, solucion);
+    imprimir_solucion(1, area_solucion, solucion);
     
-    area_solucion = maximizeArea({}, test_2);
-    cout << area_solucion << endl;
+    area_solucion = maximizeArea({}, test_2, solucion);
+    imprimir_solucion(2, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_3);
-    cout << area_solucion << endl;
+    area_solucion = maximizeArea({}, test_3, solucion);
+    imprimir_solucion(3, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_4);
-    cout << area_solucion << endl;
+    area_solucion = maximizeArea({}, test_4, solucion);
+    imprimir_solucion(4, area_solucion, solucion);
 
    return 0;
 }
