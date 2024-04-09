@@ -12,13 +12,13 @@ public:
     int alto;
     int area;
 
-    Articulo(int _id, int _x, int _y, int _ancho, int _alto) :
-        id(_id), x(_x), y(_y), ancho(_ancho), alto(_alto) {
+    Articulo(int _id, int _ancho, int _alto, int _x, int _y) :
+        id(_id), ancho(_ancho), alto(_alto), x(_x), y(_y) {
             area = _ancho * _alto;
         }
 
     Articulo() :
-        id(0), x(0), y(0), ancho(0), alto(0), area(0) {}
+        id(0), ancho(0), alto(0), x(0), y(0), area(0) {}
 
     void mostrar_articulo(){
         cout << "Articulo " << id << ":" << endl;

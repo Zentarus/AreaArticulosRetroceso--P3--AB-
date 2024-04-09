@@ -48,7 +48,7 @@ void leer_pagina(ifstream& f_in, Pagina& pagina){
         getline(f_in, x_articulo, ' ');
         getline(f_in, y_articulo);
 
-        v_articulos.push_back(Articulo(i, stoi(x_articulo), stoi(y_articulo), stoi(ancho_articulo), stoi(alto_articulo)));
+        v_articulos.push_back(Articulo(i, stoi(ancho_articulo), stoi(alto_articulo), stoi(x_articulo), stoi(y_articulo)));
 
     }
 

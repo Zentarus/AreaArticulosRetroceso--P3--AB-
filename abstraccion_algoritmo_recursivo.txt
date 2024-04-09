@@ -20,7 +20,7 @@ algoritmo(articulos, i (nivel), area, articulos_usados)
 
 main:
 
-    "area optima es algoritmo(articulos, 0, 0, {})
+    "area optima es algoritmo(articulos, 0, 0, {})"
 
 
 
