@@ -1,1 +1,0 @@
-Aqui resultado area | 1.35e+03 ms

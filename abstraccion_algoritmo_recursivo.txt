@@ -1,0 +1,28 @@
+
+
+algoritmo(articulos, i (nivel), area, articulos_usados)
+    si nivel == num_articulos (ha llegado al final)
+        return area;
+
+    si articulo(i) NO interseca con articulos_usados
+        return algoritmo(articulos, i+1, area + articulo(i).area, articulos_usados + articulo(i))   
+
+    si articulo(i) SI interseca con articulos_usados
+        articulos_interseccionados = calcular_articulos_interseccionados()
+        return max(
+                    algoritmo(articulos, i+1, area, articulos_usados)                                       (ignoramos el articulo(i))                                                              
+                    algoritmo(articulos, i+1, area - articulos_interseccionados.area + articulo(i).area,    (metemos articulo(i) y quitamos los articulos que intersecan con él)
+                                articulos_usados + articulo(i) - articulos_interseccionados)   
+                    )
+
+
+
+
+main:
+
+    "area optima es algoritmo(articulos, 0, 0, {})
+
+
+
+funcion algtoritmo devuelve el area optima dados: el vector de articulos, el nivel de profundidad, el area hasta ahora, los articulos usados
+
