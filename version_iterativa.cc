@@ -97,7 +97,7 @@ void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articul
 
 
 
-int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion, ArticuloHash& tabla){
+int busca_max_area_iterativo(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion, ArticuloHash& tabla){
     int area_max = 0;
     vector<Articulo> articulos_no_interseccionados = encontrar_no_interseccionados(articulos_anadidos, articulos_por_anadir);
 
@@ -116,7 +116,7 @@ int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos
                 area_calculada = obtener_area_desde_tabla_hash(tabla, articulos_anadidos);
             } else {
                 // sino, la calculamos recursivamente y después la agregamos 
-                area_calculada = art_anadido.area + maximizeArea(articulos_anadidos, articulos_por_anadir, solucion, tabla);
+                area_calculada = art_anadido.area + busca_max_area_iterativo(articulos_anadidos, articulos_por_anadir, solucion, tabla);
                 agregar_area_a_tabla_hash(tabla, articulos_anadidos, area_calculada);
             }
 
@@ -143,8 +143,11 @@ void imprimir_solucion(int num_test, int area_solucion, vector<Articulo> art_sol
 }
 
 
-int main() {
+int main(int argc, char *argv[]) {
 
+
+
+    
     vector<Articulo> solucion;
     ArticuloHash tabla1, tabla2, tabla3, tabla4;
 
@@ -154,17 +157,18 @@ int main() {
     vector<Articulo> test_3 = {Articulo(1, 1, 12, 1, 0), Articulo(2, 12, 3, 0, 1), Articulo(3, 12, 1, 0, 5), Articulo(4, 6, 3, 5, 1)};
     vector<Articulo> test_4 = {Articulo(1, 3, 7, 0, 0), Articulo(2, 6, 7, 3, 0), Articulo(3, 3, 7, 9, 0), Articulo(4, 12, 7, 0, 0)};
 
-    int area_solucion = maximizeArea({}, test_1, solucion, tabla1);
+    int area_solucion = busca_max_area_iterativo({}, test_1, solucion, tabla1);
     imprimir_solucion(1, area_solucion, solucion);
     
-    area_solucion = maximizeArea({}, test_2, solucion, tabla2);
+    area_solucion = busca_max_area_iterativo({}, test_2, solucion, tabla2);
     imprimir_solucion(2, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_3, solucion, tabla3);
+    area_solucion = busca_max_area_iterativo({}, test_3, solucion, tabla3);
     imprimir_solucion(3, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_4, solucion, tabla4);
+    area_solucion = busca_max_area_iterativo({}, test_4, solucion, tabla4);
     imprimir_solucion(4, area_solucion, solucion);
 
-   return 0;
+    return 0;
+
 }

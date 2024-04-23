@@ -53,7 +53,7 @@ void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articul
 
 
 
-int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion){
+int buscar_max_area_recursivo(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion){
     int area_max = 0;
     vector<Articulo> articulos_no_interseccionados = encontrar_no_interseccionados(articulos_anadidos, articulos_por_anadir);
 
@@ -67,7 +67,7 @@ int maximizeArea(vector<Articulo> articulos_anadidos, vector<Articulo> articulos
             articulos_anadidos.push_back(art_anadido);
             eliminar_articulo_vector(art_anadido, articulos_por_anadir);
 
-            area_calculada = art_anadido.area + maximizeArea(articulos_anadidos, articulos_por_anadir, solucion);
+            area_calculada = art_anadido.area + buscar_max_area_recursivo(articulos_anadidos, articulos_por_anadir, solucion);
 
             if(area_calculada > area_max){
                 area_max = area_calculada;
@@ -102,16 +102,16 @@ int main() {
     vector<Articulo> test_4 = {Articulo(1, 3, 7, 0, 0), Articulo(2, 6, 7, 3, 0), Articulo(3, 3, 7, 9, 0), Articulo(4, 12, 7, 0, 0)};
 
     
-    int area_solucion = maximizeArea({}, test_1, solucion);
+    int area_solucion = buscar_max_area_recursivo({}, test_1, solucion);
     imprimir_solucion(1, area_solucion, solucion);
     
-    area_solucion = maximizeArea({}, test_2, solucion);
+    area_solucion = buscar_max_area_recursivo({}, test_2, solucion);
     imprimir_solucion(2, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_3, solucion);
+    area_solucion = buscar_max_area_recursivo({}, test_3, solucion);
     imprimir_solucion(3, area_solucion, solucion);
 
-    area_solucion = maximizeArea({}, test_4, solucion);
+    area_solucion = buscar_max_area_recursivo({}, test_4, solucion);
     imprimir_solucion(4, area_solucion, solucion);
 
    return 0;

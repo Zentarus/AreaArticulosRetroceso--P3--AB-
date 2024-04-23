@@ -6,25 +6,48 @@
 #include <string>
 #include "./librerias/pagina.hh"
 #include "./librerias/articulo.hh"
+#include <unordered_map>
 
 using namespace std;
+using ArticuloHash = unordered_map<string, int>;
+
 
 void abrir_fichero_lectura(string nombre_fichero, ifstream& f_in);
 
 void abrir_fichero_escritura(string nombre_fichero, ofstream& f_out);
 
-void escribir_resultados(ofstream& f_out, double tiempo_ejecucion);
-
 void leer_pagina(ifstream& f_in, Pagina& pagina);
 
-void copiar_articulos(vector<Articulo> viejo, vector<Articulo> nuevo);
+bool hay_interseccion_entre_pareja_articulos(Articulo a, Articulo b);
 
-int calcular_area(const vector<Articulo>& articulos_actuales);
+vector<Articulo> encontrar_no_interseccionados(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir);
 
-bool hay_interseccion_con_ultimo_anadido(const vector<Articulo>& articulos_actuales, int nivel);
+void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articulos);
 
-bool aplicar_poda(const Pagina& pagina, const vector<Articulo>& articulos_actuales, const Articulo& sig_articulo, int nivel, int area_optima);
+void imprimir_solucion(ofstream& f_out, int num_pag, int area_solucion, vector<Articulo> art_solucion, double tiempo_ejecucion);
 
-void obtener_composicion_optima(Pagina& pagina, double& duracion_ms);
+
+// ------------------------------------------------
+//              VERSIÓN ITERATIVA
+// ------------------------------------------------
+
+// Verificar si el área de un conjunto de artículos ya está en la tabla hash
+bool area_en_tabla_hash(ArticuloHash& tabla, vector<Articulo>& articulos);
+
+// Agregar el área de un conjunto de artículos a la tabla hash
+void agregar_area_a_tabla_hash(ArticuloHash& tabla, vector<Articulo>& articulos, int area);
+
+// Obtener el área de un conjunto de artículos desde la tabla hash
+int obtener_area_desde_tabla_hash(ArticuloHash& tabla, vector<Articulo>& articulos);
+
+
+int busca_max_area_iterativo(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion, ArticuloHash& tabla);
+
+
+// ------------------------------------------------
+//              VERSIÓN RECURSIVA
+// ------------------------------------------------
+
+int buscar_max_area_recursivo(vector<Articulo> articulos_anadidos, vector<Articulo> articulos_por_anadir, vector<Articulo>& solucion);
 
 #endif
