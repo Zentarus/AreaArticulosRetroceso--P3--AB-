@@ -24,7 +24,7 @@ vector<Articulo> encontrar_no_interseccionados(vector<Articulo> articulos_anadid
 
 void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articulos);
 
-void imprimir_solucion(ofstream& f_out, int num_pag, int area_solucion, vector<Articulo> art_solucion, double tiempo_ejecucion);
+void imprimir_solucion(ofstream& f_out, int num_pag, int area_solucion, vector<Articulo> art_solucion, long double tiempo_ejecucion);
 
 
 // ------------------------------------------------

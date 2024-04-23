@@ -99,13 +99,13 @@ void eliminar_articulo_vector(Articulo art_a_eliminar, vector<Articulo>& articul
     articulos.erase(encontrado);
 }
 
-void imprimir_solucion(ofstream& f_out, int num_pag, int area_solucion, vector<Articulo> art_solucion, double tiempo_ejecucion){
+void imprimir_solucion(ofstream& f_out, int num_pag, int area_solucion, vector<Articulo> art_solucion, long double tiempo_ejecucion){
     f_out << endl;
 
-    f_out << "Pagina " << num_pag << endl << "\tTiempo: " << tiempo_ejecucion << endl << "\tArea: " << area_solucion << endl << "\tArticulos:";
+    f_out << "Pagina " << num_pag << endl << "\tTiempo: " << tiempo_ejecucion << " ms" << endl << "\tArea: " << area_solucion << " mm" << endl << "\tArticulos:";
     for(Articulo art : art_solucion){
         f_out << endl << "\t\t";
-        f_out << art.ancho << " " << art.alto << " " << art.x << " " << art.y << " (Area: " << art.area << ")";
+        f_out << art.ancho << " " << art.alto << " " << art.x << " " << art.y << " (Area: " << art.area << " mm)";
     }
 
     f_out << endl;
@@ -232,7 +232,6 @@ int buscar_max_area_recursivo(vector<Articulo> articulos_anadidos, vector<Articu
 // ================================================
 
 int main(int argc, char *argv[]){
-    double tiempo_ejecucion = 0.0;
     ifstream f_in;
     ofstream f_out;
 
@@ -268,6 +267,9 @@ int main(int argc, char *argv[]){
         f_out.close();
         return 0;
     }
+
+    auto start = chrono::high_resolution_clock::now();
+
     
     while(!f_in.eof()){
         vector<Articulo> articulos_solucion = {};
@@ -275,26 +277,30 @@ int main(int argc, char *argv[]){
         long double tiempo_ejecucion = 0;
         Pagina pagina;
         leer_pagina(f_in, pagina);
-
         
         if(recursiva) { // versión recursiva
             auto start_time = chrono::high_resolution_clock::now();
             area_solucion = buscar_max_area_recursivo({}, pagina.articulos, articulos_solucion);
             auto end_time = chrono::high_resolution_clock::now();
-            tiempo_ejecucion = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time).count() / 1000000.0;
-
+            auto duracion = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time) / 1000000.0;
+            tiempo_ejecucion = duracion.count();
         } else {        // versión iterativa
             ArticuloHash tabla_hash;
             auto start_time = chrono::high_resolution_clock::now();
             area_solucion = busca_max_area_iterativo({}, pagina.articulos, articulos_solucion, tabla_hash);
             auto end_time = chrono::high_resolution_clock::now();
-            tiempo_ejecucion = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time).count() / 1000000.0;
+            auto duracion = chrono::duration_cast<chrono::nanoseconds>(end_time - start_time) / 1000000.0;
+            tiempo_ejecucion = duracion.count();
         }
 
         //pagina.mostrar_pagina(true, num_paginas);
         imprimir_solucion(f_out, num_pag, area_solucion, articulos_solucion, tiempo_ejecucion);
         num_pag++;
     }
+
+    auto end = chrono::high_resolution_clock::now();
+    auto duracion = chrono::duration_cast<chrono::nanoseconds>(end - start) / 1000000.0;
+    cout << duracion.count();
     
     f_in.close();
     f_out.close();
