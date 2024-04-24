@@ -1,0 +1,36 @@
+El directorio se encuentra organizado con la siguiente estructura:
+
+----------------------------------------------------------------------------
+
++ practica3_839304_852646
+	+ librerias
+		- articulo.hh
+        - pagina.hh
+	- busca.cc
+	- busca.hh
+	- ejecutar.sh
+    - entrada.txt
+    - salida_p3_it.txt
+    - salida_p3_rec.txt
+    - Memoria P3 - Algoritmia Basica.pdf
+	- LEEME.txt
+
+----------------------------------------------------------------------------
+
+Los archivos en la carpeta "librerias" son recursos extra que hemos usado
+para facilitar y simplificar la implementación del programa principal.
+
+"busca.cc" y "busca.hh" es el programa realizado como tarea para la búsqueda del
+área óptima ocupada por artículos que no se solapan.
+
+"ejecutar.sh" es un script que compila y ejecuta el programa principal.
+
+El programa lee las páginas (formateadas) del fichero entrada.txt y calcula el área óptima
+que ocuparían los artículos en cada página, con la condición de que no pueden solaparse.
+
+El algoritmo utilizado para esta búsqueda es el de programación dinámica (recursiva e iterativamente).
+Se puede elegir la versión recursiva o iterativa con la opción -r o -i (respectivamente)
+al ejecutar el programa busca.exe
+
+Como resultado, se imprimen los resultados de los 3 ejemplos realizados en salida_p3_rec.txt,
+y salida_p3_it.txt, para poder comparar los resultados con las soluciones.
