@@ -236,7 +236,7 @@ int main(int argc, char *argv[]){
     ofstream f_out;
 
 
-    if (argc < 3){
+    if (argc < 4){
         cout << "ERROR: Numero de parametros invalido" << endl;
         exit(1);
     }
