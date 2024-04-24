@@ -176,7 +176,7 @@ int busca_max_area_iterativo(vector<Articulo> articulos_anadidos, vector<Articul
             if (area_en_tabla_hash(tabla, articulos_anadidos)) {
                 area_calculada = obtener_area_desde_tabla_hash(tabla, articulos_anadidos);
             } else {
-                // sino, la calculamos recursivamente y después la agregamos 
+                // sino, la calculamos recursivamente y después la agregamos
                 area_calculada = art_anadido.area + busca_max_area_iterativo(articulos_anadidos, articulos_por_anadir, solucion, tabla);
                 agregar_area_a_tabla_hash(tabla, articulos_anadidos, area_calculada);
             }

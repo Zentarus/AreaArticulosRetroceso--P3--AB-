@@ -15,11 +15,11 @@ fi
 g++ busca.hh busca.cc -o busca -std=c++11
 
 # Por si no existe pruebas.txt
-if [ ! -f pruebas.txt ]; then
-    echo "AVISO: El archivo 'pruebas.txt' no existe"
+if [ ! -f entrada.txt ]; then
+    echo "AVISO: El archivo 'entrada.txt' no existe"
     exit 1
 fi
 
 # Llamar al programa busca con los archivos de entrada y salida
-./busca -i entrada.txt salida_it.txt
-./busca -r entrada.txt salida_rec.txt
+./busca -i entrada.txt salida_p3_it.txt
+./busca -r entrada.txt salida_p3_rec.txt
