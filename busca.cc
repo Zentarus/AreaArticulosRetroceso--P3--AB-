@@ -243,10 +243,6 @@ int main(int argc, char *argv[]){
 
     abrir_fichero_lectura(argv[2], f_in);
     abrir_fichero_escritura(argv[3], f_out);
-    /*Pagina pagina;
-    leer_pagina(f_in, pagina);
-    pagina.mostrar_pagina(true);
-    */
 
     string opcion = argv[1];
     int num_pag = 1;
@@ -255,11 +251,9 @@ int main(int argc, char *argv[]){
     // valoramos la opción pasada como argumento por el usuario
     if(opcion == "-r"){
         recursiva = true;
-        f_out << "VERSIÓN RECURSIVA" << endl;
 
     } else if (opcion == "-i"){
         recursiva = false;
-        f_out << "VERSIÓN ITERATIVA" << endl;
 
     } else {
         cout << "ERROR: No se ha reconocido la opción \"" + opcion + "\"\nOpciones válidas:\n\t\t-i\n\t\t-r" << endl;
@@ -267,9 +261,6 @@ int main(int argc, char *argv[]){
         f_out.close();
         return 0;
     }
-
-    auto start = chrono::high_resolution_clock::now();
-
     
     while(!f_in.eof()){
         vector<Articulo> articulos_solucion = {};
@@ -293,14 +284,9 @@ int main(int argc, char *argv[]){
             tiempo_ejecucion = duracion.count();
         }
 
-        //pagina.mostrar_pagina(true, num_paginas);
         imprimir_solucion(f_out, num_pag, area_solucion, articulos_solucion, tiempo_ejecucion);
         num_pag++;
     }
-
-    auto end = chrono::high_resolution_clock::now();
-    auto duracion = chrono::duration_cast<chrono::nanoseconds>(end - start) / 1000000.0;
-    cout << duracion.count();
     
     f_in.close();
     f_out.close();
