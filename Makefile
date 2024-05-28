@@ -16,7 +16,7 @@ PAG=${LIB}/pagina
 ART=${LIB}/articulo
 #---------------------------------------------------------
 # opciones compilación y enlazado ("linkado")
-CPPFLAGS = -g -I. -I${LIB} -O2 -std=c++11
+CPPFLAGS = -g -I. -I${LIB} -O2 -std=c++11 -lstdc++
 #---------------------------------------------------------
 # vars
 EJEC = busca
